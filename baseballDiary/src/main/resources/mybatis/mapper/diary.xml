@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baseball.diary.member.dao.IMemberDao">
+
+<select id="getDiaryList" parameterType="MemberVO" resultType="DiaryVO">
+
+	SELECT b.mem_id
+		 , a.diary_no
+	     , a.game_day
+	     , a.diary_title
+	     , a.update_dt
+	FROM tb_diary a, tb_mem b
+	WHERE a.mem_id = b.mem_id
+	AND   a.use_yn = 'Y'
+	AND   b.mem_id = #{mem_id}
+
+</select>
+
+<insert id="writeDiary" parameterType="DiaryVO">
+
+	INSERT INTO tb_diary(mem_id, game_day, diary_title, diary_content)
+	VALUES (#{memId}, TO_DATE('2024.09.30', 'YYYY.MM.DD'), #{diaryTitle}, #{diaryContent});
+	
+</insert>
+
+<select id="getDiary" resultType="DiaryVO" parameterType="int">
+
+	SELECT b.mem_id
+	     , a.diary_no
+	     , a.game_day
+	     , a.diary_title
+	     , a.diary_content
+	     , a.update_dt
+	FROM tb_diary a, tb_mem b, tb_kbo c
+	WHERE a.mem_id = b.mem_id
+	AND   a.game_day = c.game_day
+	AND   a.home_team = c.home_team
+	AND   a.use_yn = 'Y'
+	<!-- AND   b.mem_id = 'admin' -->
+	AND   a.diary_no = #{diaryNo}
+
+</select>
+	
+	
+	
+</mapper>

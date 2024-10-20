@@ -1,6 +1,6 @@
 package com.baseball.diary.member.vo;
 
-public class MemverVO {
+public class MemberVO {
 	private String memId;    
 	private String memPw;
 	private String memNm;
@@ -52,7 +52,7 @@ public class MemverVO {
 	}
 	@Override
 	public String toString() {
-		return "MemverVO [memId=" + memId + ", memPw=" + memPw + ", memNm=" + memNm + ", kboTeam=" + kboTeam
+		return "MemberVO [memId=" + memId + ", memPw=" + memPw + ", memNm=" + memNm + ", kboTeam=" + kboTeam
 				+ ", useYn=" + useYn + ", updateDt=" + updateDt + ", createDt=" + createDt + "]";
 	}
 

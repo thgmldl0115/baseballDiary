@@ -23,9 +23,17 @@
             <ul class="navbar-nav ms-auto py-4 py-lg-0">
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></li>
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post.html">Sample Post</a></li>
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="${pageContext.request.contextPath}/registView">회원가입</a></li>
-            
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="${pageContext.request.contextPath}/diaryView">Diary List</a></li>
+                <c:if test="${sessionScope.login == null }">
+                	<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="${pageContext.request.contextPath}/loginView">로그인</a></li>
+                	<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="${pageContext.request.contextPath}/registView">회원가입</a></li>
+                </c:if>
+                <c:if test="${sessionScope.login != null }">
+                	<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="#">${sessionScope.login.memId }님</a></li>
+                	<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
+                </c:if>
+                
+                
             </ul>
         </div>
     </div>

@@ -9,5 +9,9 @@
 	  <!-- 널 허용 -->
 	  <setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
+	<typeAliases>
+		<typeAlias type="com.baseball.diary.member.vo.MemberVO" alias="MemberVO" />
+		<typeAlias type="com.baseball.diary.diary.vo.DiaryVO" alias="DiaryVO" />
+	</typeAliases>
 
 </configuration>
