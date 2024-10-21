@@ -24,4 +24,7 @@
 	<!-- @Mapper 어노테이션이 붙은 Dao 객체를 스캔할 수 있도록 함 -->
 	<mybatis-spring:scan base-package="com.baseball.diary" annotation="org.apache.ibatis.annotations.Mapper"/>
 	
+	
+	<!-- RestTemplate bean 정의 -->
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
 </beans>

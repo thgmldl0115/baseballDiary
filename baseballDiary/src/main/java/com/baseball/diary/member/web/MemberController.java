@@ -46,7 +46,7 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		
-		return "member/registView";
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/loginView")
@@ -58,8 +58,6 @@ public class MemberController {
 	public String loginDo(MemberVO vo, HttpSession session
 			, boolean remember, String fromUrl
 			, HttpServletResponse response) throws Exception {
-		
-		System.out.println(vo.toString());
 		
 		MemberVO login = memberService.loginMember(vo);
 		session.setAttribute("login", login);
@@ -80,7 +78,7 @@ public class MemberController {
 		
 		System.out.println(login);
 		// 로그인시 해당 페이지로 들어가기
-		return "redirect:"+ fromUrl ;
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/logoutDo")

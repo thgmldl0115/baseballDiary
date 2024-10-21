@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.baseball.diary.diary.service.DiaryService;
 import com.baseball.diary.diary.vo.DiaryVO;
@@ -18,36 +19,35 @@ import com.baseball.diary.member.vo.MemberVO;
 
 
 @Controller
+//@RestController
 public class DiaryController {
 	
 	@Autowired
 	DiaryService diaryService;
 	
 	@RequestMapping("/diaryView")
-	public String boardView(
-//			HttpSession session, Model model
-			) {
+	public String boardView(HttpSession session, Model model) {
 		
-//		if(session.getAttribute("login") == null) {
-//			return "redirect:/loginView";
-//		}
+		if(session.getAttribute("login") == null) {
+			return "redirect:/loginView";
+		}
 		
-//		ArrayList<DiaryVO> diaryList = diaryService.getDiaryList();
-//		model.addAttribute("diaryList", diaryList);
+		MemberVO vo = (MemberVO) session.getAttribute("login");
+		
+		ArrayList<DiaryVO> diaryList = diaryService.getDiaryList(vo);
+		model.addAttribute("diaryList", diaryList);
 		// key와 value값으로 저장.
 		// JSP 파일 내에서 Model객체에 저장된 데이터를 사용할 수 있다.
 		return "diary/diaryView";
 	}
 	
 	@RequestMapping("/diaryWriteView")
-	public String diaryWriteView(
-//			HttpSession session
-			) {
+	public String diaryWriteView(HttpSession session) {
 		
-//		if(session.getAttribute("login") == null) {
-//			return "redirect:/loginView";
-//		}
-		// 세션에 로그인된 객체가 존재하지 않으면 로그인 페이지로 보낸다.
+		if(session.getAttribute("login") == null) {
+			return "redirect:/loginView";
+		}
+		//세션에 로그인된 객체가 존재하지 않으면 로그인 페이지로 보낸다.
 		
 		return "diary/diaryWriteView";
 	}

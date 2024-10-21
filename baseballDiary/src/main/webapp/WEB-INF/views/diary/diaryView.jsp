@@ -60,11 +60,6 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>24.09.30</td>
-						<td>테스트</td>
-						<td>24.10.19</td>
 				<!-- 데이터의 수만큼 반복되는 부분 -->
 					<c:forEach items="${diaryList }" var="diary">
 					<tr>

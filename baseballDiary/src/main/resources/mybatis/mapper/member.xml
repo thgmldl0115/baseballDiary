@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.baseball.diary.member.dao.IMemberDao">
+<mapper namespace="com.baseball.diary.member.dao.IMemberDAO">
 
 <insert id="registMember" parameterType="com.baseball.diary.member.vo.MemberVO">
-		INSERT INTO members(mem_id, mem_pw, mem_nm, kbo_team)
+		INSERT INTO tb_mem(mem_id, mem_pw, mem_nm, kbo_team)
 		VALUES(#{memId}, #{memPw}, #{memNm}, #{kboTeam})
 </insert>
 
@@ -13,7 +13,7 @@
 		     , mem_nm
 		     , mem_pw
 		     , kbo_team
-		FROM members
+		FROM tb_mem
 		WHERE use_yn = 'Y'
 		AND   mem_id = #{memId}
 

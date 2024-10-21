@@ -78,7 +78,7 @@
 	                
 	                <div class="row g-3 align-items-center">
 	                	<!-- 라인업 -->
-	                	<div class="col-sm-3">
+	                	<div class="col-lg-3">
 	                		
 							<table id="lineup" class="table table-bordered ">
 								<thead>
@@ -146,7 +146,7 @@
 						<!-- /라인업 -->
 						
 						<!-- score board -->
-						<div class="col-sm-9" style="margin:0;">
+						<div class="col-lg-9" style="margin:0;">
 						
 							<div class="row" style="overflow:auto;">
 								<table id="diarycontent" class="table table-bordered" >

@@ -65,8 +65,21 @@
 	                	<table id="game" class="table table-bordered">
 							<thead>
 								<tr>
-									<th><label for="gameday" class="col-form-label">24.09.30</label></th>
-									<th><label for="gamespace" class="col-form-label">광주</label></th>
+									<th><input type="date" name="gameday" id="gameday" class="col-form-label"
+									onchange="fn_gameDay(this)" style="width:100%; border: 0;"></th>
+									<th>
+									<!--<label for="gamespace" class="col-form-label">광주</label>-->
+									
+									<select id="gameList" name="gameList" class="form-control input-sm" 
+										style="width:100%; border: 0;" >
+										<!--
+										<option value="T" ${searchVO.searchType eq "T" ? "selected='selected'": ""} >제목</option>
+										<option value="W" ${searchVO.searchType eq "W" ? "selected='selected'": ""} >작성자</option>
+										<option value="C" ${searchVO.searchType eq "C" ? "selected='selected'": ""}>내용</option>
+										-->
+									</select>
+									
+									</th>
 									<td><label for="diaryTitle" class="col-form-label">제목</label></td>
 									<td>
 										<input type="text" id="diaryTitle" name="diaryTitle" 
@@ -80,75 +93,38 @@
 	                
 	                <div class="row g-3 align-items-center">
 	                	<!-- 라인업 -->
-	                	<div class="col-sm-3">
-	                		
-							<table id="lineup" class="table table-bordered ">
-								<thead>
-									<tr>
-										<th colspan="3">lineup</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th scope="row">1</th>
-										<td>박찬호</td>
-										<td>SS</td>
-									</tr>
-									<tr>
-										<th scope="row">2</th>
-										<td>소크라테스</td>
-										<td>LF</td>
-									</tr>
-									<tr>
-										<th scope="row">3</th>
-										<td>김도영</td>
-										<td>3B</td>
-									</tr>
-									<tr>
-										<th scope="row">4</th>
-										<td>최형우</td>
-										<td>DH</td>
-									</tr>
-									<tr>
-										<th scope="row">5</th>
-										<td>나성범</td>
-										<td>RF</td>
-									</tr>
-									<tr>
-										<th scope="row">6</th>
-										<td>김선빈</td>
-										<td>2B</td>
-									</tr>
-									<tr>
-										<th scope="row">7</th>
-										<td>이우성</td>
-										<td>1B</td>
-									</tr>
-									<tr>
-										<th scope="row">8</th>
-										<td>김태군</td>
-										<td>C</td>
-									</tr>
-									<tr>
-										<th scope="row">9</th>
-										<td>최원준</td>
-										<td>CF</td>
-									</tr>
-									<tr>
-										<th scope="row"></th>
-										<td>양현종</td>
-										<td>P</td>
-									</tr>
-									
-								</tbody>
+	                	<div class="col-xl-3">
+	                		<div class="accordion" id="accordionExample">
+							  <div class="accordion-item">
+							    <h2 class="accordion-header">
+							      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+							        home
+							      </button>
+							    </h2>
+							    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+							      <div class="accordion-body" id="homeLineup">
+							      </div>
+							    </div>
+							  </div>
+							  <div class="accordion-item">
+							    <h2 class="accordion-header">
+							      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+							        away
+							      </button>
+							    </h2>
+							    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+							      <div class="accordion-body" id="awayLineup">
+							      </div>
+							    </div>
+							  </div>
+							</div>
 							
-							</table>
 							
 						</div>
 						<!-- /라인업 -->
 						
 						<!-- score board -->
-						<div class="col-sm-9" style="margin:0;">
+						<div class="col-xl-9" style="margin:0;">
 						
 							<div class="row" style="overflow:auto;">
 								<table id="diarycontent" class="table table-bordered" >
@@ -241,7 +217,97 @@
 	<!-- /게시판 목록 -->
     <jsp:include page="/WEB-INF/inc/footer.jsp"></jsp:include>
 	
+	<script>
 	
+		$(document).ready(function(){
+				$("#gameList").change(function(){
+					fn_ajax('homeLineup', $(this).val());
+					fn_ajax('awayLineup', $(this).val());
+				});
+				
+		});
+		function fn_ajax(url, code){
+			$.ajax({
+				 url : '<c:url value="/api/'+url+'" />'
+				,type: 'GET'
+				,data:{"code":code}
+				,contentType: 'application/json'
+				,dataType: "json"
+				,success:function(res){
+					console.log(res);
+					$("#" +url ).empty();
+					let str="";
+					str += "<table class='table table-bordered '>";
+					str += "<thead> <tr> <th colspan='3'> lineup </th> </tr> </thead>";
+					str += "<tbody>";
+					for(let i=1; i<10; i++){
+						let player = res[i];
+						str += "<tr>";
+						str += "<th scope='row'>" + player.batorder + "</th>";
+						str += "<td scope='row'>" + player.playerName + "</td>";
+						str += "<td scope='row'>" + player.positionName + "</td>";
+						str += "</tr>";
+					}
+					str += "<tr>";
+					str += "<th scope='row'>"+"</th>";
+					str += "<td scope='row'>" + res[0].playerName + "</td>";
+					str += "<td scope='row'>" + res[0].positionName + "</td>";
+					str += "</tr>";
+					
+					str += "</tbody>";
+					str += "</table>";
+					$("#" +url ).append(str);
+					
+				},error:function(e){
+					console.log(e);
+					$("#" +url ).empty();
+					let str="";
+					str += "<table class='table table-bordered '>";
+					str += "<thead> <tr> <th colspan='3'> 경기가 없습니다! </th> </tr> </thead>";
+					str += "</table>";
+					$("#" +url ).append(str);
+				},complete:function(data){
+				}
+			});
+			
+		}
+// 	 	let gameDay = document.getElementById('gameDay');
+		function fn_gameDay(obj){
+			console.log(obj.value);
+			
+			$.ajax({
+				 url : '<c:url value="/api/gameDay" />'
+				,type: 'GET'
+				,data:{"gameDay":obj.value}
+				,contentType: 'application/json'
+				,dataType: "json"
+				,success:function(res){
+					$("#gameList").empty();
+					let gameList = res.gameList;
+					let str = "";
+					
+					str +=  "<option value='" + game.code + "'>"+'경기를 선택해주세요'+"</option>";
+					
+					for (let i=0; i<gameList.length; i++) {
+						let game = gameList[i];
+						
+						str +=  "<option value='" + game.code + "'>";
+						str += game.awayTeam + ' vs ' + game.homeTeam + ' ' + game.gameDay.substr(11, 5) + ' ' + game.gameNote;
+						str += "</option>";
+			            //<option value="T" ${searchVO.searchType eq "T" ? "selected='selected'": ""} >제목</option>
+			        	
+					}
+					$("#gameList").append(str);
+					
+				},error:function(e){
+					console.log(e);
+				}
+			});
+		}
+		
+	
+	</script>
 
 </body>
+
 </html>

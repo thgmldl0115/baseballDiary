@@ -8,6 +8,11 @@
 <!-- Google fonts-->
 <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="${pageContext.request.contextPath }/css/styles.css" rel="stylesheet" />
 
@@ -23,14 +28,15 @@
             <ul class="navbar-nav ms-auto py-4 py-lg-0">
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></li>
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="${pageContext.request.contextPath}/diaryView">Diary List</a></li>
+                
                 <c:if test="${sessionScope.login == null }">
                 	<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="${pageContext.request.contextPath}/loginView">로그인</a></li>
                 	<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="${pageContext.request.contextPath}/registView">회원가입</a></li>
                 </c:if>
                 <c:if test="${sessionScope.login != null }">
                 	<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="#">${sessionScope.login.memId }님</a></li>
-                	<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
+                	<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="${pageContext.request.contextPath}/diaryView">Diary List</a></li>
+                	<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="${pageContext.request.contextPath}/logoutDo">로그아웃</a></li>
                 </c:if>
                 
                 

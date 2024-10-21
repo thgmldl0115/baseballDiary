@@ -12,6 +12,7 @@
 	<typeAliases>
 		<typeAlias type="com.baseball.diary.member.vo.MemberVO" alias="MemberVO" />
 		<typeAlias type="com.baseball.diary.diary.vo.DiaryVO" alias="DiaryVO" />
+		<typeAlias type="com.baseball.diary.diary.vo.GameDayVO" alias="GameDayVO" />
 	</typeAliases>
 
 </configuration>

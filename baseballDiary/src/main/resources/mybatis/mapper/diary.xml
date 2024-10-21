@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.baseball.diary.member.dao.IMemberDao">
+<mapper namespace="com.baseball.diary.diary.dao.IDiaryDAO">
 
 <select id="getDiaryList" parameterType="MemberVO" resultType="DiaryVO">
 
@@ -12,7 +12,7 @@
 	FROM tb_diary a, tb_mem b
 	WHERE a.mem_id = b.mem_id
 	AND   a.use_yn = 'Y'
-	AND   b.mem_id = #{mem_id}
+	AND   b.mem_id = #{memId}
 
 </select>
 
@@ -40,7 +40,56 @@
 	AND   a.diary_no = #{diaryNo}
 
 </select>
+
+<select id="getGameList" resultType="GameDayVO" parameterType="string">
+
+	SELECT game_day
+    ,  yymm || away ||home || cnt || yy  as code
+    ,  away_team
+    ,  home_team
+    ,  home_team_score
+    ,  game_space
+    ,  game_note
+FROM (
+  SELECT     game_day
+            ,TO_CHAR(game_day,'YYYYMMDD') as yymm
+            ,CASE WHEN away_team = 'LG' THEN 'LG'
+                  WHEN away_team = 'KT' THEN 'KT'
+                  WHEN away_team = 'SSG' THEN 'SK'
+                  WHEN away_team = 'NC' THEN 'NC'
+                  WHEN away_team = '두산' THEN 'OB'
+                  WHEN away_team = 'KIA' THEN 'HT'
+                  WHEN away_team = '롯데' THEN 'LT'
+                  WHEN away_team = '삼성' THEN 'SS'
+                  WHEN away_team = '한화' THEN 'HH'
+                  WHEN away_team = '키움' THEN 'WO'
+              END as away
+             ,CASE WHEN home_team = 'LG' THEN 'LG'
+                  WHEN home_team = 'KT' THEN 'KT'
+                  WHEN home_team = 'SSG' THEN 'SK'
+                  WHEN home_team = 'NC' THEN 'NC'
+                  WHEN home_team = '두산' THEN 'OB'
+                  WHEN home_team = 'KIA' THEN 'HT'
+                  WHEN home_team = '롯데' THEN 'LT'
+                  WHEN home_team = '삼성' THEN 'SS'
+                  WHEN home_team = '한화' THEN 'HH'
+                  WHEN home_team = '키움' THEN 'WO'
+             END as home
+             , TO_CHAR(game_day,'YYYY') AS yy
+            ,away_team
+            ,away_team_score
+            ,home_team
+            ,home_team_score
+            ,game_space
+            ,game_note
+            ,CASE WHEN COUNT(*) OVER(PARTITION BY away_team||home_team) >1 THEN TO_CHAR(ROW_NUMBER() OVER(PARTITION BY away_team||home_team ORDER BY game_day ASC))  
+             ELSE '0' END  as cnt
+   FROM tb_kbo
+   WHERE TO_CHAR(game_day,'YYYY-MM-DD') = #{gameDay}
+   )
 	
-	
+
+</select>
+
 	
 </mapper>

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.baseball.diary.diary.dao.IDiaryDAO;
 import com.baseball.diary.diary.vo.DiaryVO;
+import com.baseball.diary.diary.vo.GameDayVO;
+import com.baseball.diary.member.vo.MemberVO;
 
 @Service
 public class DiaryService {
@@ -14,8 +16,8 @@ public class DiaryService {
 	@Autowired
 	IDiaryDAO dao;
 
-	public ArrayList<DiaryVO> getDiaryList(){
-		ArrayList<DiaryVO> result = dao.getDiaryList();
+	public ArrayList<DiaryVO> getDiaryList(MemberVO vo){
+		ArrayList<DiaryVO> result = dao.getDiaryList(vo);
 		
 		return result;
 	}
@@ -35,6 +37,10 @@ public class DiaryService {
 		}
 		
 		return result;
+	}
+	
+	public ArrayList<GameDayVO> getGameList(String gameDay) {
+		return dao.getGameList(gameDay);
 	}
 	
 	
