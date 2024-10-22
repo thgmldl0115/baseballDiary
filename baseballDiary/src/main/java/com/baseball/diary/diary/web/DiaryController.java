@@ -21,7 +21,6 @@ import com.baseball.diary.member.vo.MemberVO;
 
 
 @Controller
-//@RestController
 public class DiaryController {
 	
 	@Autowired
@@ -67,7 +66,7 @@ public class DiaryController {
 		return "redirect:/diaryView";
 	}
 	
-	@RequestMapping("/diaryDetailView")
+	@RequestMapping("/getDiary")
 	public String diaryDetailView(int diaryNo, Model model) throws Exception {
 		
 		DiaryVO diary = diaryService.getDiary(diaryNo);
@@ -76,21 +75,21 @@ public class DiaryController {
 		return "diary/diaryDetailView";
 	}
 	
-	// 단순히 브라우저 주소창에 URL을 입력한 경우 글 수정이 이루어지면 안되기 때문에,
-	// POST방식으로 요청한 데이터만 처리하도록 한다.
-	@RequestMapping(value="/diaryEditView", method=RequestMethod.POST)
+	@PostMapping("/diaryEditView")
 	public String diaryEditView(int diaryNo, Model model) throws Exception {
 		
 		DiaryVO vo = diaryService.getDiary(diaryNo);
 		model.addAttribute("diary", vo);
+		System.out.println(vo.toString());
 		
 		return "diary/diaryEditView";
 	}
 	
 	// PostMapping 어노테이션을 사용하면 POST로 요청온 URL만 처리한다.
 	@PostMapping("/diaryEditDo")
-	public String diaryEditDo(DiaryVO vo) throws Exception {
-		
+	public String diaryEditDo(Model model, DiaryVO vo) throws Exception {
+
+		System.out.println(vo.toString());
 		diaryService.updateDiary(vo);
 		
 		return "redirect:/diaryView";

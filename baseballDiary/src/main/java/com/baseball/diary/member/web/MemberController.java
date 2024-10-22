@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.baseball.diary.member.service.MemberService;
@@ -33,7 +35,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/mypage")
-	public String mypage() {
+	public String mypage(HttpSession session, Model model) {
+		if(session.getAttribute("login") == null) {
+			return "redirect:/loginView";
+		}
 		return "member/mypage";
 	}
 	
@@ -115,6 +120,14 @@ public class MemberController {
 		session.invalidate();
 		
 		return "redirect:/";
+	}
+	
+	@PostMapping("/mypageEditDo")
+	public String mypageEditDo(Model model, MemberVO vo) throws Exception {
+		
+		memberService.updateMypage(vo);
+		
+		return "redirect:/loginView";
 	}
 	
 

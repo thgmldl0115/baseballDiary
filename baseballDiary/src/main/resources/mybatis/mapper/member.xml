@@ -18,6 +18,16 @@
 		AND   mem_id = #{memId}
 
 </select>
+
+<update id="updateMypage" parameterType="MemberVO">
+	
+	UPDATE tb_mem 
+	SET mem_nm=#{memNm}
+	  , kbo_team = #{kboTeam}
+	WHERE mem_id=#{memId}
+
+</update>
+
 	
 	
 	

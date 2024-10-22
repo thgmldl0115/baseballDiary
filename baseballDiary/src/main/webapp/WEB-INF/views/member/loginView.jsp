@@ -57,7 +57,7 @@
 		<div class="container text-center row align-items-center"> 
 			<form action="/loginDo" method="post">
 				<!-- id input -->
-				<div class="row g-3 align-items-center">
+				<div class="row g-3 align-items-center" style="justify-content: center;">
 					<div class="col-sm-3">
 						<label for="id" class="col-form-label">아이디</label>
 					</div>
@@ -67,7 +67,7 @@
 					</div>
 				</div>
 				<!-- password input -->
-				<div class="row g-3 align-items-center">
+				<div class="row g-3 align-items-center" style="justify-content: center;">
 					<div class="col-sm-3">
 						<label for="pw" class="col-form-label">비밀번호</label>
 					</div>
@@ -83,7 +83,7 @@
 					 -->
 				</div>
 				
-				<div class="row d-flex justify-content-center">
+				<div class="row d-flex justify-content-center" style="margin-top:2rem; margin-bottom:1rem;">
                     		<span><input ${cookie.rememberId.value ==null ? "" : "checked" } type="checkbox" 
                     		class="form-check-input" name="remember"/> 아이디 기억하기 </span>
                 </div>

@@ -54,32 +54,32 @@
 	<div class="container text-center" style="margin-bottom: 2rem;">
 		<div class="border d-flex justify-content-center" style="padding:2rem;">
 		
-		<div class="container text-center row align-items-center"> 
-			<form action="<c:url value="/registDo" />" method="post">
+		<div class="container text-center row align-items-center" > 
+			<form action="/mypageEditDo" method="post">
 				<!-- id input -->
-				<div class="row g-3 align-items-center">
+				<div class="row g-3 align-items-center" style="justify-content: center;" >
 					<div class="col-sm-3">
 						<label for="id" class="col-form-label">아이디</label>
 					</div>
 					<div class="col-sm-6">
-						<input type="text" id="id" name="memId" class="form-control" 
+						<input type="text" id="id" name="memId" class="form-control" readonly
 							placeholder="아이디를 입력하세요" value="${sessionScope.login.memId }"/>
 					</div>
 				</div>
 				
 				<!-- nm input -->
-				<div class="row g-3 align-items-center">
+				<div class="row g-3 align-items-center" style="justify-content: center;">
 					<div class="col-sm-3">
 						<label for="nm" class="col-form-label">닉네임</label>
 					</div>
 					<div class="col-sm-6">
-						<input type="text" id="nm" name="memId" class="form-control" 
+						<input type="text" id="nm" name="memNm" class="form-control" 
 							placeholder="닉네임을 입력하세요" value="${sessionScope.login.memNm }"/>
 					</div>
 				</div>
 				
 				<!-- team  -->
-				<div class="row g-3 align-items-center">
+				<div class="row g-3 align-items-center" style="justify-content: center;">
 					<div class="col-sm-3">
 						<label for="kboTeam" class="col-form-label">응원팀</label>
 					</div>
@@ -101,10 +101,9 @@
 					</div>
 				</div>
 
-				
+				<p style="font-size:0.8rem; color: #FF0000; margin-bottom:1rem;">*개인정보 수정 시 재로그인이 필요합니다.</p>
 				<!-- Submit Button -->
-				<button class="btn btn-outline-success" 
-					type="submit">수정하기</button>
+				<button class="btn btn-outline-success" type="submit">수정하기</button>
 			</form>
 		</div>
 		

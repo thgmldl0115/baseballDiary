@@ -31,11 +31,9 @@ public class DiaryService {
 	
 	public DiaryVO getDiary(int diaryNo) throws Exception {
 		DiaryVO result = dao.getDiary(diaryNo);
-		
 		if(result == null) {
 			throw new Exception();
 		}
-		
 		return result;
 	}
 	

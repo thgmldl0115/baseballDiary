@@ -53,20 +53,18 @@
 		<div class="container text-center row align-items-center"> 
 			<form action="/registDo" method="post">
 				<!-- id input -->
-				<div class="row g-3 align-items-center">
+				<div class="row g-3 align-items-center" style="justify-content: center;">
 					<div class="col-sm-3">
 						<label for="id" class="col-form-label">아이디</label>
 					</div>
 					<div class="col-sm-6">
 						<input type="text" id="id" name="memId" class="form-control" placeholder="아이디를 입력하세요"/>
 					</div>
-					<div class="col-sm-3">
-						<button type="button" class="btn btn-outline-success btn-sm">중복확인</button>
-					</div>
+					
 					
 				</div>
 				<!-- password input -->
-				<div class="row g-3 align-items-center">
+				<div class="row g-3 align-items-center" style="justify-content: center;">
 					<div class="col-sm-3">
 						<label for="pw" class="col-form-label">비밀번호</label>
 					</div>
@@ -74,13 +72,10 @@
 						<input type="password" id="pw" name="memPw" class="form-control"
 							aria-describedby="passwordHelpInline" placeholder="비밀번호를 입력하세요"/>
 					</div>
-					<div class="col-sm-3">
-						<span id="pw" class="form-text" style="font-size: 0.8rem;">
-							조건 : 4~10자리 </span>
-					</div>
+					
 				</div>
 				
-				<div class="row g-3 align-items-center">
+				<div class="row g-3 align-items-center" style="justify-content: center;">
 					<div class="col-sm-3">
 						<label for="pw" class="col-form-label">비밀번호 확인</label>
 					</div>
@@ -88,13 +83,11 @@
 						<input type="password" id="pw2" name="memPw2" class="form-control"
 							aria-describedby="passwordHelpInline" placeholder="비밀번호를 다시 입력하세요"/>
 					</div>
-					<div class="col-sm-3">
-						<button type="button" class="btn btn-outline-success btn-sm">확인</button>
-					</div>
+					
 				</div>
 
 				<!-- name input -->
-				<div class="row g-3 align-items-center">
+				<div class="row g-3 align-items-center" style="justify-content: center;">
 					<div class="col-sm-3">
 						<label for="nm" class="col-form-label">닉네임</label>
 					</div>
@@ -104,7 +97,7 @@
 				</div>
 				
 				<!-- team  -->
-				<div class="row g-3 align-items-center">
+				<div class="row g-3 align-items-center" style="justify-content: center;">
 					<div class="col-sm-3">
 						<label for="kboTeam" class="col-form-label">응원팀</label>
 					</div>
@@ -127,7 +120,7 @@
 				</div>
 				
 				<!-- Submit Button -->
-				<button class="btn btn-outline-success" id="submitButton"
+				<button class="btn btn-outline-success" id="submitButton" style="margin-top:2rem;"
 					type="submit">가입하기</button>
 			</form>
 		</div>

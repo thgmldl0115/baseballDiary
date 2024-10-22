@@ -63,8 +63,8 @@
 				<!-- 데이터의 수만큼 반복되는 부분 -->
 					<c:forEach items="${diaryList }" var="diary">
 					<tr>
-						<td><a href="<c:url value="/diaryDetailView?diaryNo=${diary.diaryNo }"/> ">${diary.gameDay }</a></td>
-						<td><a href="<c:url value="/diaryDetailView?diaryNo=${diary.diaryNo }"/> ">${diary.diaryTitle }</a></td>
+						<td><a href="<c:url value="/getDiary?diaryNo=${diary.diaryNo }"/> ">${diary.gameDay }</a></td>
+						<td><a href="<c:url value="/getDiary?diaryNo=${diary.diaryNo }"/> ">${diary.diaryTitle }</a></td>
 						
 						<td>${diary.createDt }</td>
 					</tr>

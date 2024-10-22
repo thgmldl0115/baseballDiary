@@ -46,7 +46,9 @@
 	UPDATE tb_diary
 	SET diary_title = #{diaryTitle}
 	   ,diary_content = #{diaryContent}
+	   ,update_dt = SYSDATE
 	WHERE diary_no = #{diaryNo}
+	AND   mem_id = #{memId}
 
 </update>
 

@@ -10,5 +10,7 @@ public interface IMemberDAO {
 	public int registMember(MemberVO vo);
 	// 로그인
 	public MemberVO loginMember(MemberVO vo);
+	// 마이페이지 수정
+	public int updateMypage(MemberVO vo);
 
 }

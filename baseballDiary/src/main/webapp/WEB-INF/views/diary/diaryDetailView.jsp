@@ -156,7 +156,7 @@
 					<c:if test="${sessionScope.login.memId == diary.memId }">
 						<div class="d-flex justify-content-center">
 		                	<!-- Submit Button-->
-		                	<form action="/diaryEditView" method="post">
+		                	<form action="<c:url value="/diaryEditView"/>" method="post">
 		                		<input type="hidden" name="diaryNo" value="${diary.diaryNo }">
 		                		<button class="btn btn-outline-success row" type="submit" style="margin-bottom:1rem; margin-right:2rem;">수정</button>
 		                	</form>

@@ -32,5 +32,14 @@ public class MemberService {
 		
 		return result;
 	}
+	
+	public void updateMypage(MemberVO vo) throws Exception {
+		System.out.println(vo.toString());
+		int result = dao.updateMypage(vo);
+		
+		if(result == 0) {
+			throw new Exception();
+		}
+	}
 
 }

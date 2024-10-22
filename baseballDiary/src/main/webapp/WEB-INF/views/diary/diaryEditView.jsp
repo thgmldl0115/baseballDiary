@@ -49,7 +49,9 @@
                 </div>
             </div>
         </header>
-
+        
+	<!-- Contact Section-->
+    <section class="page-section" id="contact">
 	<!-- Contact Section Form-->
 	<div class="container text-center" style="margin-bottom: 2rem;">
 		<div class="border d-flex justify-content-center">
@@ -153,9 +155,10 @@
 	                	</div>
 	                	
 					</div>
-					
+						<input type="hidden" name="memId" value="${sessionScope.login.memId}">
+              			<input type="hidden" name="DiaryNo" value="${diary.diaryNo}">
 					<!-- Submit Button-->
-	                <button class="btn btn-outline-success row" type="submit" style="margin-bottom:1rem;">등록</button>
+	                <button class="btn btn-outline-success row" type="submit" style="margin-bottom:1rem;">수정</button>
             	</form>     
             </div>
         </main>
@@ -164,6 +167,7 @@
 		
 		</div>
 	</div>
+	</section>
 
     <jsp:include page="/WEB-INF/inc/footer.jsp"></jsp:include>
 	
