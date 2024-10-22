@@ -24,12 +24,13 @@
 	div .row{
 		margin-bottom:0.5rem;
 	}
+
 </style>
 
 <title>Baseball Diary</title>
 </head>
 
-<body>
+<body style="font-size:1rem;">
     <jsp:include page="/WEB-INF/inc/top.jsp"></jsp:include>
     <!-- Page Header-->
         <header class="masthead" style="background-image: url('assets/img/baseball3.jpg')">
@@ -54,8 +55,8 @@
 				<thead>
 					<tr>
 						<th>No</th>
-						<th>경기일</th>
 						<th>제목</th>
+						<th>경기일</th>
 						<th>작성일</th>
 					</tr>
 				</thead>
@@ -64,8 +65,8 @@
 					<c:forEach items="${diaryList }" var="diary">
 					<tr>
 						<td>${diary.diaryNo }</td>
+						<td><a href="<c:url value="/diaryDetailView?diaryNo=${diary.diaryNo }"/> ">${diary.diaryTitle }</a></td>
 						<td><a href="<c:url value="/diaryDetailView?diaryNo=${diary.diaryNo }"/> ">${diary.gameDay }</a></td>
-						<td>${diary.diaryTitle }</td>
 						<td>${diary.updateDt }</td>
 					</tr>
 					</c:forEach>

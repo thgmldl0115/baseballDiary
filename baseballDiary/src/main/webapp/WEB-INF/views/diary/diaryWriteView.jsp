@@ -29,12 +29,14 @@
 		
 	}
 	
+
+	
 </style>
 
 <title>Baseball Diary</title>
 </head>
 
-<body>
+<body style="font-size:1rem;">
     <jsp:include page="/WEB-INF/inc/top.jsp"></jsp:include>
     <!-- Page Header-->
 	<header class="masthead" style="background-image: url('assets/img/baseball5.jpg')">
@@ -56,19 +58,19 @@
 		<div class="container text-center row align-items-center"> 
 		<!-- Main Content-->
         <main class="mb-4">
-            <div class="border container px-4 px-lg-5">
+            <div class="border container px-4 px-lg-5" >
                 
 	            <form action="/diaryWriteDo" method="post">
 	            	<!-- title input -->
 	            	
-	                <div class="row g-3 gx-5 align-items-center" style="margin:0rem;">
-	                	<table id="game" class="table table-bordered">
-							<thead>
-								<tr>
-									<th><input type="date" name="gameday" id="gameday" class="col-form-label"
+	            	<div class="row g-3 gx-5 align-items-center" style="margin:0rem; padding:1rem;">
+	            	
+	            		<div class="col-xl-6" style="padding:0rem; margin:0rem;">
+	            			<table id="game" class="table table-bordered">
+	            				<tr>
+	            					<th><input type="date" name="gameday" id="gameday" class="col-form-label"
 									onchange="fn_gameDay(this)" style="width:100%; border: 0;"></th>
 									<th>
-									<!--<label for="gamespace" class="col-form-label">광주</label>-->
 									
 									<select id="gameList" name="gameList" class="form-control input-sm" 
 										style="width:100%; border: 0;" >
@@ -80,15 +82,26 @@
 									</select>
 									
 									</th>
-									<td><label for="diaryTitle" class="col-form-label">제목</label></td>
+	            				</tr>
+	            			</table>
+	            		</div>
+	            		
+	            		<div class="col-xl-6" style="padding:0rem; margin:0rem;">
+	            			<table class="table table-bordered">
+	            				<tr>
+	            					<td><label for="diaryTitle" class="col-form-label">제목</label></td>
 									<td>
 										<input type="text" id="diaryTitle" name="diaryTitle" 
 											class="form-control" style="width:100%; border: 0;"/>
 									</td>
-								</tr>
-							</thead>
-						</table>
+	            				</tr>
+	            			</table>
+	            		</div>
+	                	
 					</div>
+					
+	            	
+	                
 
 	                
 	                <div class="row g-3 align-items-center">
@@ -102,7 +115,7 @@
 							      </button>
 							    </h2>
 							    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-							      <div class="accordion-body" id="homeLineup">
+							      <div class="accordion-body" id="homeLineup" >
 							      </div>
 							    </div>
 							  </div>
@@ -126,7 +139,7 @@
 						<!-- score board -->
 						<div class="col-xl-9" style="margin:0;">
 						
-							<div class="row" style="overflow:auto;">
+							<div class="row" style="overflow:auto; padding:0.8rem;">
 								<table id="diarycontent" class="table table-bordered" >
 									<thead >
 										<tr>
@@ -195,7 +208,7 @@
 								</table>
 							</div>
 							
-							<div style="overflow:auto; height:18.5rem;">
+							<div style="overflow:auto; height:20rem;">
 								<textarea class="form-control" name="diaryContent" 
 		                    			style="height:100%; width:100%; resize: none;"></textarea>
 							</div>

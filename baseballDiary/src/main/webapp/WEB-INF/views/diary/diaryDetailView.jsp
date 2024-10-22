@@ -34,7 +34,7 @@
 <title>Baseball Diary</title>
 </head>
 
-<body>
+<body style="font-size:1rem;"> 
     <jsp:include page="/WEB-INF/inc/top.jsp"></jsp:include>
     <!-- Page Header-->
 	<header class="masthead" style="background-image: url('assets/img/baseball5.jpg')">
@@ -148,7 +148,7 @@
 						<!-- score board -->
 						<div class="col-lg-9" style="margin:0;">
 						
-							<div class="row" style="overflow:auto;">
+							<div class="row" style="overflow:auto; padding:0.8rem;">
 								<table id="diarycontent" class="table table-bordered" >
 									<thead >
 										<tr>
@@ -217,7 +217,7 @@
 								</table>
 							</div>
 							
-							<div style="overflow:auto; height:18.5rem;">
+							<div style="overflow:auto; height:20rem;">
 								<textarea class="form-control" name="diaryContent" 
 		                    			style="height:100%; width:100%; resize: none;">${diary.diaryContent }</textarea>
 							</div>
