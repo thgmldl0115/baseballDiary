@@ -10,6 +10,7 @@ public class GameDayVO {
 	private String gameSpace;
 	private String gameNote;
 	private String code;
+	
 	public String getCode() {
 		return code;
 	}

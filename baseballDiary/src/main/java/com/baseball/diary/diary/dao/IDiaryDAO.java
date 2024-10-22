@@ -16,8 +16,14 @@ public interface IDiaryDAO {
 	public int writeDiary(DiaryVO vo);
 	// 다이어리 상세 조회
 	public DiaryVO getDiary(int diaryNo);
+	// 다이어리 수정
+	public int updateDiary(DiaryVO vo);
+	// 다이어리 삭제
+	public int deleteDiary(int diaryNo);
 	
 	// 해당일 게임 리스트 조회
 	public ArrayList<GameDayVO> getGameList(String gameDay);
+	
+	
 	
 }

@@ -70,11 +70,34 @@
 				<!-- nm input -->
 				<div class="row g-3 align-items-center">
 					<div class="col-sm-3">
-						<label for="nm" class="col-form-label">이름</label>
+						<label for="nm" class="col-form-label">닉네임</label>
 					</div>
 					<div class="col-sm-6">
 						<input type="text" id="nm" name="memId" class="form-control" 
 							placeholder="닉네임을 입력하세요" value="${sessionScope.login.memNm }"/>
+					</div>
+				</div>
+				
+				<!-- team  -->
+				<div class="row g-3 align-items-center">
+					<div class="col-sm-3">
+						<label for="kboTeam" class="col-form-label">응원팀</label>
+					</div>
+					<div class="col-sm-6">
+						<select class="form-select" id="kboTeam" name="kboTeam" value="${sessionScope.login.kboTeam }">
+                        <option selected disabled value="">응원팀을 선택하세요</option>
+                        <option value="ALL" ${sessionScope.login.kboTeam eq "ALL" ? "selected='selected'": ""}>응원팀 없음</option>
+                        <option value="LG" ${sessionScope.login.kboTeam eq "LG" ? "selected='selected'": ""}>LG 트윈스</option>
+                        <option value="KT" ${sessionScope.login.kboTeam eq "KT" ? "selected='selected'": ""}>KT 위즈</option>
+                        <option value="SK" ${sessionScope.login.kboTeam eq "SK" ? "selected='selected'": ""}>SSG 랜더스</option>
+                        <option value="NC" ${sessionScope.login.kboTeam eq "NC" ? "selected='selected'": ""}>NC 다이노스</option>
+                        <option value="OB" ${sessionScope.login.kboTeam eq "OB" ? "selected='selected'": ""}>두산 베어스</option>
+                        <option value="HT" ${sessionScope.login.kboTeam eq "HT" ? "selected='selected'": ""}>KIA 타이거즈</option>
+                        <option value="LT" ${sessionScope.login.kboTeam eq "LT" ? "selected='selected'": ""}>롯데 자이언츠</option>
+                        <option value="SS" ${sessionScope.login.kboTeam eq "SS" ? "selected='selected'": ""}>삼성 라이온즈</option>
+                        <option value="HH" ${sessionScope.login.kboTeam eq "HH" ? "selected='selected'": ""}>한화 이글스</option>
+                        <option value="WO" ${sessionScope.login.kboTeam eq "WO" ? "selected='selected'": ""}>키움 히어로즈</option>
+                    </select>
 					</div>
 				</div>
 

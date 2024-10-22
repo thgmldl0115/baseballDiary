@@ -37,7 +37,6 @@ public class CodeController {
 	  @Autowired
 	  private DiaryService diaryService;
 
-
 	  @GetMapping("/homeLineup")
       public List<Map<String, Object>> getHomeLineup(@RequestParam String code) {
           String lineupUrl = "https://api-gw.sports.naver.com/schedule/games/" + code + "/preview";
@@ -123,6 +122,86 @@ public class CodeController {
 
           return lineupList;
       }
+      
+      @GetMapping("/scoreBoard")
+      public List<Map<String, Object>> scoreBoard(@RequestParam String code) {
+          String scoreUrl = "https://api-gw.sports.naver.com/schedule/games/" + code;
+          HttpHeaders headers = new HttpHeaders();
+          headers.setContentType(MediaType.APPLICATION_JSON);
+          headers.setAcceptCharset(List.of(StandardCharsets.UTF_8));
+          HttpEntity<String> entity = new HttpEntity<>(headers);
+
+          ResponseEntity<String> response = restTemplate.exchange(scoreUrl, HttpMethod.GET, entity, String.class);
+          List<Map<String, Object>> ScoreList = new ArrayList<>();
+
+          if (response.getStatusCode().is2xxSuccessful()) {
+              try {
+                  String responseBody = new String(response.getBody().getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+                  JSONParser parser = new JSONParser();
+                  JSONObject jsonData = (JSONObject) parser.parse(responseBody);
+                  JSONObject result = (JSONObject) jsonData.get("result");
+                  
+                  Map<String, Object> gameData = new HashMap<>();
+                  
+                  JSONObject game = (JSONObject) result.get("game");
+                  String gameDateTime = (String) game.get("gameDateTime");
+                  String winner = (String) game.get("winner");
+                  String stadium = (String) game.get("stadium");
+                  String homeTeamName = (String) game.get("homeTeamName");
+                  String homeTeamFullName = (String) game.get("homeTeamFullName");
+                  String awayTeamName = (String) game.get("awayTeamName");
+                  String awayTeamFullName = (String) game.get("awayTeamFullName");
+                  String homeTeamCode = (String) game.get("homeTeamCode");
+                  String awayTeamCode = (String) game.get("awayTeamCode");
+                  
+                  gameData.put("gameDateTime", gameDateTime);
+                  gameData.put("winner", winner);
+                  gameData.put("stadium", stadium);
+                  gameData.put("homeTeamName", homeTeamName);
+                  gameData.put("homeTeamFullName", homeTeamFullName);
+                  gameData.put("homeTeamCode", homeTeamCode);
+                  gameData.put("awayTeamName", awayTeamName);
+                  gameData.put("awayTeamFullName", awayTeamFullName);
+                  gameData.put("awayTeamCode", awayTeamCode);
+                  
+                  
+                  JSONArray homeTeamScoreByInning = (JSONArray) game.get("homeTeamScoreByInning");
+                  ArrayList<Integer> homes = new ArrayList<>();
+                  for (int i = 0; i < homeTeamScoreByInning.size(); i++) {
+                	  String ScoreByInning = (String)homeTeamScoreByInning.get(i);
+                	  if(!ScoreByInning.equals("-")){
+                		  homes.add(Integer.parseInt(ScoreByInning));
+                	  }
+                     
+                  }
+                  gameData.put("homeTeamScoreByInning", homes);
+                  
+                  JSONArray awayTeamScoreByInning = (JSONArray) game.get("awayTeamScoreByInning");
+                  
+                  ArrayList<Integer> aways = new ArrayList<>();
+                  for (int i = 0; i < awayTeamScoreByInning.size(); i++) {
+                	  String ScoreByInning = (String)awayTeamScoreByInning.get(i);
+                	  if(!ScoreByInning.equals("-")){
+                		  aways.add(Integer.parseInt(ScoreByInning));
+                	  }
+                  }
+                  gameData.put("awayTeamScoreByInning", aways);
+                  
+                  JSONArray homeTeamRheb = (JSONArray) game.get("homeTeamRheb");
+                  JSONArray awayTeamRheb = (JSONArray) game.get("awayTeamRheb");
+                  gameData.put("homeTeamRheb", homeTeamRheb);
+                  gameData.put("awayTeamRheb", awayTeamRheb);
+                  
+                  ScoreList.add(gameData);
+
+              } catch (org.json.simple.parser.ParseException e) {
+                  e.printStackTrace();
+              }
+          }
+          return ScoreList;
+          
+    }
+      
 
       @GetMapping("/gameDay")
       public Map<String, Object> getGameList(@RequestParam String gameDay) {

@@ -21,23 +21,28 @@
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
     <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="index.html">Baseball Diary</a>
+    	<c:if test="${sessionScope.login == null }">
+        	<a class="navbar-brand" href="${pageContext.request.contextPath}/">Baseball Diary</a>
+        </c:if>
+        <c:if test="${sessionScope.login != null }">
+        	<a class="navbar-brand" href="${pageContext.request.contextPath}/main">Baseball Diary</a>
+        </c:if>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
             <i class="fas fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>
                 
                 <c:if test="${sessionScope.login == null }">
+                	<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="${pageContext.request.contextPath}/">Home</a></li>
                 	<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="${pageContext.request.contextPath}/loginView">로그인</a></li>
                 	<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="${pageContext.request.contextPath}/registView">회원가입</a></li>
                 </c:if>
                 <c:if test="${sessionScope.login != null }">
-                	<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="#">${sessionScope.login.memId }님</a></li>
+                	<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="${pageContext.request.contextPath}/main">Home</a></li>
                 	<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="${pageContext.request.contextPath}/diaryView">Diary List</a></li>
+                	<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="${pageContext.request.contextPath}/mypage">${sessionScope.login.memId }님</a></li>
                 	<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="${pageContext.request.contextPath}/logoutDo">로그아웃</a></li>
                 </c:if>
                 

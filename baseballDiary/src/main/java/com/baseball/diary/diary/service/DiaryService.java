@@ -39,6 +39,22 @@ public class DiaryService {
 		return result;
 	}
 	
+	public void updateDiary(DiaryVO vo) throws Exception {
+		int result = dao.updateDiary(vo);
+		
+		if(result == 0) {
+			throw new Exception();
+		}
+	}
+	
+	public void deleteDiary(int diaryNo) throws Exception {
+		int result = dao.deleteDiary(diaryNo);
+		
+		if(result == 0) {
+			throw new Exception();
+		}
+	}
+	
 	public ArrayList<GameDayVO> getGameList(String gameDay) {
 		return dao.getGameList(gameDay);
 	}

@@ -58,8 +58,8 @@
 		<!-- Main Content-->
         <main class="mb-4">
             <div class="container px-3 px-lg-4" >
-                
-	            <form action="/diaryWriteDo" method="post">
+                	
+                <form action="/diaryEditDo" method="post">
 	            	<!-- title input -->
 	            	
 	            	<div class="row p-0 g-3 gx-3 align-items-center" style="margin-top:1rem; margin-bottom:0;">
@@ -67,20 +67,9 @@
 	            		<div class="p-0 m-0 col-xl-6">
 	            			<table id="game" class="m-0 table table-bordered">
 	            				<tr>
-	            					<th><input type="date" name="gameDay" id="gameday" class="col-form-label"
-									onchange="fn_gameDay(this)" style="width:100%; border: 0;"></th>
-									<th>
-									
-									<select id="gameList" name="code" class="form-control input-sm" 
-										style="width:100%; border: 0;" >
-										<!--
-										<option value="T" ${searchVO.searchType eq "T" ? "selected='selected'": ""} >제목</option>
-										<option value="W" ${searchVO.searchType eq "W" ? "selected='selected'": ""} >작성자</option>
-										<option value="C" ${searchVO.searchType eq "C" ? "selected='selected'": ""}>내용</option>
-										-->
-									</select>
-									
-									</th>
+	            					<th><input type="date" name="gameDay" id="gameday" class="col-form-label" value="${diary.gameDay}"
+									style="width:100%; border: 0;" readonly/></th>
+									<td id="gameList" valign=middle></td>
 	            				</tr>
 	            			</table>
 	            		</div>
@@ -90,18 +79,14 @@
 	            				<tr>
 	            					<td><label for="diaryTitle" class="col-form-label">제목</label></td>
 									<td>
-										<input type="text" id="diaryTitle" name="diaryTitle" 
-											class="form-control" style="width:100%; border: 0;"/>
+										<input type="text" id="diaryTitle" name="diaryTitle" value="${diary.diaryTitle}"
+											class="form-control" style="width:100%; border: 0;" />
 									</td>
 	            				</tr>
 	            			</table>
 	            		</div>
 	                	
 					</div>
-					
-	            	
-	                
-
 	                
 	                <div class="row p-0 g-3 gx-3 align-items-center" style="margin-top:1rem; margin-bottom:1rem;">
 	                	<!-- 라인업 -->
@@ -115,21 +100,6 @@
 							    </h2>
 							    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
 							      <div class="accordion-body" id="homeLineup" >
-							      	<table class='table table-bordered '>
-							      		<thead> <tr> <th colspan='3'> lineup </th> </tr> </thead>
-							      		<tbody> 
-							      			<tr><th scope='row'>1</th><td scope='row'>&nbsp;</td><td scope='row'>&nbsp;</td></tr>
-							      			<tr><th scope='row'>2</th><td scope='row'>&nbsp;</td><td scope='row'>&nbsp;</td></tr>
-							      			<tr><th scope='row'>3</th><td scope='row'>&nbsp;</td><td scope='row'>&nbsp;</td></tr>
-							      			<tr><th scope='row'>4</th><td scope='row'>&nbsp;</td><td scope='row'>&nbsp;</td></tr>
-							      			<tr><th scope='row'>5</th><td scope='row'>&nbsp;</td><td scope='row'>&nbsp;</td></tr>
-							      			<tr><th scope='row'>6</th><td scope='row'>&nbsp;</td><td scope='row'>&nbsp;</td></tr>
-							      			<tr><th scope='row'>7</th><td scope='row'>&nbsp;</td><td scope='row'>&nbsp;</td></tr>
-							      			<tr><th scope='row'>8</th><td scope='row'>&nbsp;</td><td scope='row'>&nbsp;</td></tr>
-							      			<tr><th scope='row'>9</th><td scope='row'>&nbsp;</td><td scope='row'>&nbsp;</td></tr>
-							      			<tr><th scope='row'>&nbsp;</th><td scope='row'>&nbsp;</td><td scope='row'>&nbsp;</td></tr>
-							      		</tbody>
-							      	</table>
 							      </div>
 							    </div>
 							  </div>
@@ -141,39 +111,17 @@
 							    </h2>
 							    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
 							      <div class="accordion-body" id="awayLineup">
-							      	<table class='table table-bordered '>
-							      		<thead> <tr> <th colspan='3'> lineup </th> </tr> </thead>
-							      		<tbody> 
-							      			<tr><th scope='row'>1</th><td scope='row'>&nbsp;</td><td scope='row'>&nbsp;</td></tr>
-							      			<tr><th scope='row'>2</th><td scope='row'>&nbsp;</td><td scope='row'>&nbsp;</td></tr>
-							      			<tr><th scope='row'>3</th><td scope='row'>&nbsp;</td><td scope='row'>&nbsp;</td></tr>
-							      			<tr><th scope='row'>4</th><td scope='row'>&nbsp;</td><td scope='row'>&nbsp;</td></tr>
-							      			<tr><th scope='row'>5</th><td scope='row'>&nbsp;</td><td scope='row'>&nbsp;</td></tr>
-							      			<tr><th scope='row'>6</th><td scope='row'>&nbsp;</td><td scope='row'>&nbsp;</td></tr>
-							      			<tr><th scope='row'>7</th><td scope='row'>&nbsp;</td><td scope='row'>&nbsp;</td></tr>
-							      			<tr><th scope='row'>8</th><td scope='row'>&nbsp;</td><td scope='row'>&nbsp;</td></tr>
-							      			<tr><th scope='row'>9</th><td scope='row'>&nbsp;</td><td scope='row'>&nbsp;</td></tr>
-							      			<tr><th scope='row'>&nbsp;</th><td scope='row'>&nbsp;</td><td scope='row'>&nbsp;</td></tr>
-							      		</tbody>
-							      	</table>
 							      </div>
 							    </div>
 							  </div>
 							</div>
-							
-							
 						</div>
 						<!-- /라인업 -->
 						
-						<!-- score board -->
 						<div class="m-0 col-xl-9">
-							<p id="gamedata2" style="margin:0; padding:0; font-size:0.9rem;">
-									<strong>gameTime:</strong> &nbsp;&nbsp; 
-									<strong>stadium :</strong> &nbsp;&nbsp; 
-									<strong>winner :</strong> &nbsp;
-								</p>
+							<p id="gamedata2" style="margin:0; padding:0; font-size:0.9rem;"></p>
+							<!-- score board -->
 							<div class="row" style="overflow:auto; padding:0.8rem;">
-								
 								<table class="table table-bordered">
 									<thead >
 									
@@ -182,11 +130,6 @@
 										</tr>
 										
 										<tr id="gamedata1" valign=middle>
-											<th colspan="6">away</th>
-											<th colspan="2">-</th>
-											<td>vs</td>
-											<th colspan="2">-</th>
-											<th colspan="6">home</th>
 										</tr>
 										
 										<tr>
@@ -197,36 +140,23 @@
 										</tr>
 									</thead>
 									<tbody id="scoreBoard">
-										<tr>
-											<th scope="row">&nbsp;</th>
-											<td></td><td></td><td></td><td></td><td></td><td></td>
-											<td></td><td></td><td></td><td></td><td></td><td></td>
-											<td></td><td></td><td></td><td></td>
-										</tr>
-										<tr>
-											<th scope="row">&nbsp;</th>
-											<td></td><td></td><td></td><td></td><td></td><td></td>
-											<td></td><td></td><td></td><td></td><td></td><td></td>
-											<td></td><td></td><td></td><td></td>
-										</tr>
 									</tbody>
 								</table>
-								
 							</div>
+							<!-- /score board -->
 							
 							<div style="overflow:auto; height:20rem; ">
-								<textarea class="form-control" name="diaryContent" 
-		                    			style="height:100%; width:100%; resize: none;"></textarea>
+								<textarea class="form-control" name="diaryContent"
+		                    			style="height:100%; width:100%; resize: none;" >${diary.diaryContent}</textarea>
 							</div>
 							
 	                	</div>
 	                	
 					</div>
-
-	                <!-- Submit Button-->
+					
+					<!-- Submit Button-->
 	                <button class="btn btn-outline-success row" type="submit" style="margin-bottom:1rem;">등록</button>
-	            </form>
-                        
+            	</form>     
             </div>
         </main>
 		
@@ -235,18 +165,16 @@
 		</div>
 	</div>
 
-	<!-- /게시판 목록 -->
     <jsp:include page="/WEB-INF/inc/footer.jsp"></jsp:include>
 	
 	<script>
 	
 		$(document).ready(function(){
-				$("#gameList").change(function(){
-					fn_ajax('homeLineup', $(this).val());
-					fn_ajax('awayLineup', $(this).val());
-					fn_gameScore($(this).val());
-				});
-				
+
+				// 화면왔을때 
+				fn_ajax('homeLineup','${diary.code}');
+				fn_ajax('awayLineup','${diary.code}');
+				fn_gameScore('${diary.code}');
 		});
 		function fn_ajax(url, code){
 			$.ajax({
@@ -370,41 +298,10 @@
 					str3 += '<strong>winner : </strong>' +res[0].winner ;
 					$("#gamedata2").append(str3);
 					
-					
-				},error:function(e){
-					console.log(e);
-				}
-			});
-		}
-		
-// 	 	let gameDay = document.getElementById('gameDay');
-		function fn_gameDay(obj){
-			console.log(obj.value);
-			
-			$.ajax({
-				 url : '<c:url value="/api/gameDay" />'
-				,type: 'GET'
-				,data:{"gameDay":obj.value}
-				,contentType: 'application/json'
-				,dataType: "json"
-				,success:function(res){
-					console.log(res);
 					$("#gameList").empty();
-					let gameList = res.gameList;
-					let str = "";
+					str4 = res[0].awayTeamName + ' vs ' + res[0].homeTeamName + ' ' + res[0].gameDateTime.substr(11,5);
+					$("#gameList").append(str4);
 					
-					str +=  "<option value='none'>"+'경기를 선택해주세요'+"</option>";
-					
-					for (let i=0; i<gameList.length; i++) {
-						let game = gameList[i];
-						
-						str +=  "<option value='" + game.code + "'>";
-						str += game.awayTeam + ' vs ' + game.homeTeam + ' ' + game.gameDay.substr(11, 5) + ' ' + game.gameNote;
-						str += "</option>";
-			            //<option value="T" ${searchVO.searchType eq "T" ? "selected='selected'": ""} >제목</option>
-			        	
-					}
-					$("#gameList").append(str);
 					
 				},error:function(e){
 					console.log(e);
@@ -412,6 +309,7 @@
 			});
 		}
 		
+
 		
 		
 	

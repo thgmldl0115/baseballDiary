@@ -54,9 +54,8 @@
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>No</th>
-						<th>제목</th>
 						<th>경기일</th>
+						<th>제목</th>
 						<th>작성일</th>
 					</tr>
 				</thead>
@@ -64,10 +63,10 @@
 				<!-- 데이터의 수만큼 반복되는 부분 -->
 					<c:forEach items="${diaryList }" var="diary">
 					<tr>
-						<td>${diary.diaryNo }</td>
-						<td><a href="<c:url value="/diaryDetailView?diaryNo=${diary.diaryNo }"/> ">${diary.diaryTitle }</a></td>
 						<td><a href="<c:url value="/diaryDetailView?diaryNo=${diary.diaryNo }"/> ">${diary.gameDay }</a></td>
-						<td>${diary.updateDt }</td>
+						<td><a href="<c:url value="/diaryDetailView?diaryNo=${diary.diaryNo }"/> ">${diary.diaryTitle }</a></td>
+						
+						<td>${diary.createDt }</td>
 					</tr>
 					</c:forEach>
 				</tbody>

@@ -10,7 +10,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.baseball.diary.diary.service.DiaryService;
@@ -53,9 +55,7 @@ public class DiaryController {
 	}
 	
 	@RequestMapping("/diaryWriteDo")
-	public String diaryWriteDo(DiaryVO vo
-			, HttpSession session
-			) throws Exception {
+	public String diaryWriteDo(DiaryVO vo, HttpSession session) throws Exception {
 		
 		// input 태그를 통해 회원이 아이디를 가져오지는 못하므로
 		// 세션 객체로부터 로그인 된 회원의 아이디를 꺼내서 board 객체에 담는다.
@@ -74,6 +74,34 @@ public class DiaryController {
 		model.addAttribute("diary", diary);
 		
 		return "diary/diaryDetailView";
+	}
+	
+	// 단순히 브라우저 주소창에 URL을 입력한 경우 글 수정이 이루어지면 안되기 때문에,
+	// POST방식으로 요청한 데이터만 처리하도록 한다.
+	@RequestMapping(value="/diaryEditView", method=RequestMethod.POST)
+	public String diaryEditView(int diaryNo, Model model) throws Exception {
+		
+		DiaryVO vo = diaryService.getDiary(diaryNo);
+		model.addAttribute("diary", vo);
+		
+		return "diary/diaryEditView";
+	}
+	
+	// PostMapping 어노테이션을 사용하면 POST로 요청온 URL만 처리한다.
+	@PostMapping("/diaryEditDo")
+	public String diaryEditDo(DiaryVO vo) throws Exception {
+		
+		diaryService.updateDiary(vo);
+		
+		return "redirect:/diaryView";
+	}
+	
+	@PostMapping("/diaryDelDo")
+	public String diaryDelDo(int diaryNo) throws Exception {
+		
+		diaryService.deleteDiary(diaryNo);
+		
+		return "redirect:/diaryView";
 	}
 
 }

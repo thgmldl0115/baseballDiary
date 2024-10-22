@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,9 +19,22 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
 	@RequestMapping("/registView")
 	public String registView() {
 		return "member/registView";
+	}
+	
+	@RequestMapping("/main")
+	public String main() {
+		return "member/main";
+	}
+	
+	@RequestMapping("/mypage")
+	public String mypage() {
+		return "member/mypage";
 	}
 	
 	@RequestMapping("/registDo")
@@ -33,10 +47,13 @@ public class MemberController {
 		
 		MemberVO member = new MemberVO();
 		
+		String encodePw = passwordEncoder.encode(pw);
+		
 		member.setMemId(id);
-		member.setMemPw(pw);
+		member.setMemPw(encodePw);
 		member.setMemNm(nm);
 		member.setKboTeam(kboTeam);
+		
 		
 		System.out.println(member.toString());
 		
@@ -46,7 +63,7 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		
-		return "redirect:/";
+		return "redirect:/loginView";
 	}
 	
 	@RequestMapping("/loginView")
@@ -60,6 +77,17 @@ public class MemberController {
 			, HttpServletResponse response) throws Exception {
 		
 		MemberVO login = memberService.loginMember(vo);
+		
+		/*
+		 * DB에서 가져온 암호화된 비밀번호(vo.getMemPw())에서 salt값 추출
+		 * 사용자가 입력한 평문 비밀번호(login.getMemPw())와 추출된 salt값을 사용하여 비밀번호 재암호화
+		 * 2단계에서 암호화된 값과 DB에서 가져온 암호화된 비밀번호 비료
+		 * 두 값이 일치하면 true반환, 그렇지 않으면 false를 반환 
+		 */
+		boolean match = passwordEncoder.matches(vo.getMemPw(), login.getMemPw());
+		if(login == null || !match) {
+			return "redirect:/loginView";
+		}
 		session.setAttribute("login", login);
 		// 세션 객체에 key값은 login, value값은 login객체로 저장
 		
@@ -78,7 +106,7 @@ public class MemberController {
 		
 		System.out.println(login);
 		// 로그인시 해당 페이지로 들어가기
-		return "redirect:/";
+		return "redirect:/main";
 	}
 	
 	@RequestMapping("/logoutDo")

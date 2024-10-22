@@ -3,9 +3,9 @@ package com.baseball.diary.diary.vo;
 public class DiaryVO {
 	
 	private String memId;
-	private Integer diaryNo;
+	private int diaryNo;
 	private String gameDay;
-	private String homeTeam;
+	private String code;
 	private String diaryTitle;
 	private String diaryContent;
 	private String useYn;
@@ -18,11 +18,10 @@ public class DiaryVO {
 	public void setMemId(String memId) {
 		this.memId = memId;
 	}
-	
-	public Integer getDiaryNo() {
+	public int getDiaryNo() {
 		return diaryNo;
 	}
-	public void setDiaryNo(Integer diaryNo) {
+	public void setDiaryNo(int diaryNo) {
 		this.diaryNo = diaryNo;
 	}
 	public String getGameDay() {
@@ -31,11 +30,11 @@ public class DiaryVO {
 	public void setGameDay(String gameDay) {
 		this.gameDay = gameDay;
 	}
-	public String getHomeTeam() {
-		return homeTeam;
+	public String getcode() {
+		return code;
 	}
-	public void setHomeTeam(String homeTeam) {
-		this.homeTeam = homeTeam;
+	public void setcode(String code) {
+		this.code = code;
 	}
 	public String getDiaryTitle() {
 		return diaryTitle;
@@ -67,12 +66,15 @@ public class DiaryVO {
 	public void setCreateDt(String createDt) {
 		this.createDt = createDt;
 	}
+	
 	@Override
 	public String toString() {
-		return "DiaryVO [memId=" + memId + ", diaryNo=" + diaryNo + ", gameDay=" + gameDay + ", homeTeam=" + homeTeam
+		return "DiaryVO [memId=" + memId + ", diaryNo=" + diaryNo + ", gameDay=" + gameDay + ", code=" + code
 				+ ", diaryTitle=" + diaryTitle + ", diaryContent=" + diaryContent + ", useYn=" + useYn + ", updateDt="
 				+ updateDt + ", createDt=" + createDt + "]";
 	}
+	
+	
 	
 	
 	

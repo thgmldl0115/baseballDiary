@@ -21,20 +21,20 @@
 	.error{
 		color:red;, font-size:0.9em;
 	}
-	.row{
-		margin-bottom:0.5rem;
-	}
+	
 	div .line{
 		outline: 1px solid black;
 		
 	}
+	
+
 	
 </style>
 
 <title>Baseball Diary</title>
 </head>
 
-<body style="font-size:1rem;"> 
+<body style="font-size:1rem;">
     <jsp:include page="/WEB-INF/inc/top.jsp"></jsp:include>
     <!-- Page Header-->
 	<header class="masthead" style="background-image: url('assets/img/baseball5.jpg')">
@@ -51,194 +51,286 @@
         </header>
 
 	<!-- Contact Section Form-->
-	<div class="container text-center d-flex justify-content-center" style="margin-bottom: 2rem; padding:2rem;">
+	<div class="container text-center" style="margin-bottom: 2rem;">
+		<div class="border d-flex justify-content-center">
 		
-		<div class="container text-center row align-items-center"> 
+		<div class="p-0 container text-center row align-items-center"> 
 		<!-- Main Content-->
         <main class="mb-4">
-            <div class="border container px-4 px-lg-5">
+            <div class="container px-3 px-lg-4" >
                 
 	            	<!-- title input -->
 	            	
-	                <div class="row g-3 gx-5 align-items-center" style="margin:0rem;">
-	                	<table id="game" class="table table-bordered">
-							<thead>
-								<tr>
-									<th><label for="gameday" class="col-form-label">24.09.30</label></th>
-									<th><label for="gamespace" class="col-form-label">광주</label></th>
-									<td><label for="diaryTitle" class="col-form-label">제목</label></td>
+	            	<div class="row p-0 g-3 gx-3 align-items-center" style="margin-top:1rem; margin-bottom:0;">
+	            	
+	            		<div class="p-0 m-0 col-xl-6">
+	            			<table id="game" class="m-0 table table-bordered">
+	            				<tr>
+	            					<th><input type="date" name="gameDay" id="gameday" class="col-form-label" value="${diary.gameDay}"
+									style="width:100%; border: 0;" readonly/></th>
+									<td id="gameList" valign=middle></td>
+	            				</tr>
+	            			</table>
+	            		</div>
+	            		
+	            		<div class="p-0 m-0 col-xl-6" >
+	            			<table class="m-0 table table-bordered">
+	            				<tr>
+	            					<td><label for="diaryTitle" class="col-form-label">제목</label></td>
 									<td>
-										<h6 id="diaryTitle">${diary.diaryTitle }</h6>
+										<input type="text" id="diaryTitle" name="diaryTitle" value="${diary.diaryTitle}"
+											class="form-control" style="width:100%; border: 0;" readonly/>
 									</td>
-								</tr>
-							</thead>
-						</table>
+	            				</tr>
+	            			</table>
+	            		</div>
+	                	
 					</div>
-
 	                
-	                <div class="row g-3 align-items-center">
+	                <div class="row p-0 g-3 gx-3 align-items-center" style="margin-top:1rem; margin-bottom:1rem;">
 	                	<!-- 라인업 -->
-	                	<div class="col-lg-3">
-	                		
-							<table id="lineup" class="table table-bordered ">
-								<thead>
-									<tr>
-										<th colspan="3">lineup</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th scope="row">1</th>
-										<td>박찬호</td>
-										<td>SS</td>
-									</tr>
-									<tr>
-										<th scope="row">2</th>
-										<td>소크라테스</td>
-										<td>LF</td>
-									</tr>
-									<tr>
-										<th scope="row">3</th>
-										<td>김도영</td>
-										<td>3B</td>
-									</tr>
-									<tr>
-										<th scope="row">4</th>
-										<td>최형우</td>
-										<td>DH</td>
-									</tr>
-									<tr>
-										<th scope="row">5</th>
-										<td>나성범</td>
-										<td>RF</td>
-									</tr>
-									<tr>
-										<th scope="row">6</th>
-										<td>김선빈</td>
-										<td>2B</td>
-									</tr>
-									<tr>
-										<th scope="row">7</th>
-										<td>이우성</td>
-										<td>1B</td>
-									</tr>
-									<tr>
-										<th scope="row">8</th>
-										<td>김태군</td>
-										<td>C</td>
-									</tr>
-									<tr>
-										<th scope="row">9</th>
-										<td>최원준</td>
-										<td>CF</td>
-									</tr>
-									<tr>
-										<th scope="row"></th>
-										<td>양현종</td>
-										<td>P</td>
-									</tr>
-									
-								</tbody>
-							
-							</table>
-							
+	                	<div class="m-0 col-xl-3" >
+	                		<div class="accordion" id="accordionExample" style="margin-bottom:0.5rem;">
+							  <div class="accordion-item">
+							    <h2 class="accordion-header">
+							      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+							        home
+							      </button>
+							    </h2>
+							    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+							      <div class="accordion-body" id="homeLineup" >
+							      </div>
+							    </div>
+							  </div>
+							  <div class="accordion-item">
+							    <h2 class="accordion-header">
+							      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+							        away
+							      </button>
+							    </h2>
+							    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+							      <div class="accordion-body" id="awayLineup">
+							      </div>
+							    </div>
+							  </div>
+							</div>
 						</div>
 						<!-- /라인업 -->
 						
-						<!-- score board -->
-						<div class="col-lg-9" style="margin:0;">
-						
+						<div class="m-0 col-xl-9">
+							<p id="gamedata2" style="margin:0; padding:0; font-size:0.9rem;"></p>
+							<!-- score board -->
 							<div class="row" style="overflow:auto; padding:0.8rem;">
-								<table id="diarycontent" class="table table-bordered" >
+								<table class="table table-bordered">
 									<thead >
+									
 										<tr>
-											<th colspan="17">score board</th>
+											<th colspan="17" style="font-size:1.2rem;">score board</th>
 										</tr>
+										
+										<tr id="gamedata1" valign=middle>
+										</tr>
+										
 										<tr>
 											<th>Team</th>
-											<th>1</th>
-											<th>2</th>
-											<th>3</th>
-											<th>4</th>
-											<th>5</th>
-											<th>6</th>
-											<th>7</th>
-											<th>8</th>
-											<th>9</th>
-											<th>10</th>
-											<th>11</th>
-											<th>12</th>
-											<th>R</th>
-											<th>H</th>
-											<th>E</th>
-											<th>B</th>
+											<th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th>
+											<th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th>
+											<th>R</th><th>H</th><th>E</th><th>B</th>
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<th scope="row">NC</th>
-											<td>2</td>
-											<td>0</td>
-											<td>0</td>
-											<td>0</td>
-											<td>0</td>
-											<td>1</td>
-											<td>0</td>
-											<td>2</td>
-											<td>0</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>5</td>
-											<td>11</td>
-											<td>3</td>
-											<td>4</td>
-										</tr>
-										<tr>
-											<th scope="row">KIA</th>
-											<td>0</td>
-											<td>5</td>
-											<td>0</td>
-											<td>0</td>
-											<td>0</td>
-											<td>3</td>
-											<td>0</td>
-											<td>2</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>-</td>
-											<td>10</td>
-											<td>15</td>
-											<td>1</td>
-											<td>6</td>
-										</tr>
+									<tbody id="scoreBoard">
 									</tbody>
 								</table>
 							</div>
+							<!-- /score board -->
 							
-							<div style="overflow:auto; height:20rem;">
-								<textarea class="form-control" name="diaryContent" 
-		                    			style="height:100%; width:100%; resize: none;">${diary.diaryContent }</textarea>
+							<div style="overflow:auto; height:20rem; ">
+								<textarea class="form-control" name="diaryContent"
+		                    			style="height:100%; width:100%; resize: none;" readonly>${diary.diaryContent}</textarea>
 							</div>
 							
 	                	</div>
 	                	
 					</div>
-
-	                <!-- Submit Button-->
-	                <button class="btn btn-outline-success row" type="submit">수정</button>
+					
+					<c:if test="${sessionScope.login.memId == diary.memId }">
+						<div class="d-flex justify-content-center">
+		                	<!-- Submit Button-->
+		                	<form action="/diaryEditView" method="post">
+		                		<input type="hidden" name="diaryNo" value="${diary.diaryNo }">
+		                		<button class="btn btn-outline-success row" type="submit" style="margin-bottom:1rem; margin-right:2rem;">수정</button>
+		                	</form>
+		                	<form action="/diaryDelDo" method="post" id="delForm">
+		                		<input type="hidden" name="diaryNo" value="${diary.diaryNo }">
+		                		<button class="btn btn-outline-dark row" type="button" 
+		                			style="margin-bottom:1rem;" onclick="f_diaryDel()">삭제</button>
+		            		</form>
+	            		</div>
+	            	</c:if>
                         
             </div>
         </main>
 		
 		</div>
+		
+		</div>
 	</div>
 
-	<!-- /게시판 목록 -->
     <jsp:include page="/WEB-INF/inc/footer.jsp"></jsp:include>
 	
+	<script>
+		function f_diaryDel(){
+			if(confirm("정말로 삭제하시겠습니까?")){
+				document.getElementById("delForm").submit();
+			}
+		}
 	
+		$(document).ready(function(){
+
+				// 화면왔을때 
+				fn_ajax('homeLineup','${diary.code}');
+				fn_ajax('awayLineup','${diary.code}');
+				fn_gameScore('${diary.code}');
+		});
+		function fn_ajax(url, code){
+			$.ajax({
+				 url : '<c:url value="/api/'+url+'" />'
+				,type: 'GET'
+				,data:{"code":code}
+				,contentType: 'application/json'
+				,dataType: "json"
+				,success:function(res){
+					console.log(res);
+					$("#" +url ).empty();
+					let str="";
+					str += "<table class='table table-bordered '>";
+					str += "<thead> <tr> <th colspan='3'> lineup </th> </tr> </thead>";
+					str += "<tbody>";
+					for(let i=1; i<10; i++){
+						let player = res[i];
+						str += "<tr>";
+						str += "<th scope='row'>" + player.batorder + "</th>";
+						str += "<td scope='row'>" + player.playerName + "</td>";
+						str += "<td scope='row'>" + player.positionName + "</td>";
+						str += "</tr>";
+					}
+					str += "<tr>";
+					str += "<th scope='row'>"+"</th>";
+					str += "<td scope='row'>" + res[0].playerName + "</td>";
+					str += "<td scope='row'>" + res[0].positionName + "</td>";
+					str += "</tr>";
+					
+					str += "</tbody>";
+					str += "</table>";
+					$("#" +url ).append(str);
+					
+				},error:function(e){
+					console.log(e);
+					$("#" +url ).empty();
+					let str="";
+					str += "<table class='table table-bordered '>";
+					str += "<thead> <tr> <th colspan='3'> 경기가 없습니다! </th> </tr> </thead>";
+					str += "</table>";
+					$("#" +url ).append(str);
+				},complete:function(data){
+				}
+			});
+			
+		}
+		
+		function fn_gameScore(code){
+			console.log(code);
+			
+			$.ajax({
+				 url : '<c:url value="/api/scoreBoard" />'
+				,type: 'GET'
+				,data:{"code":code}
+				,contentType: 'application/json'
+				,dataType: "json"
+				,success:function(res){
+					$("#scoreBoard").empty();
+					console.log(res);
+					let str="";
+					
+					str += "<tr>";
+					str += "<th scope='row'>";
+					str += res[0].awayTeamName;
+					str += "</th>";
+					for(let i=0; i<12; i++){
+						if(i<res[0].awayTeamScoreByInning.length){
+							str += "<td>" + res[0].awayTeamScoreByInning[i] + "</td>";
+						}else{
+							str += "<td> - </td>";
+						}
+					}
+					for(let i=0; i<res[0].awayTeamRheb.length; i++){
+						if(i==0){
+							str += "<th>" + res[0].awayTeamRheb[i] + "</th>";
+						}else{
+							str += "<td>" + res[0].awayTeamRheb[i] + "</td>";
+						}
+					}
+					
+					str += "</tr>";
+					
+					str += "<tr>";
+					str += "<th scope='row'>";
+					str += res[0].homeTeamName;
+					str += "</th>";
+					for(let i=0; i<12; i++){
+						if(i<res[0].homeTeamScoreByInning.length){
+							str += "<td>" + res[0].homeTeamScoreByInning[i] + "</td>";
+						}else{
+							str += "<td> - </td>";
+						}
+					}
+					for(let i=0; i<res[0].homeTeamRheb.length; i++){
+						if(i==0){
+							str += "<th>" + res[0].homeTeamRheb[i] + "</th>";
+						}else{
+							str += "<td>" + res[0].homeTeamRheb[i] + "</td>";
+						}
+					}
+					
+					str += "</tr>";
+
+					$("#scoreBoard").append(str);
+					
+					$("#gamedata1").empty();
+					str2 = "";
+					str2 += "<th colspan='6'>";
+					str2 += "<img src='assets/img/" + res[0].awayTeamCode + ".png' width='50rem'>"+'&nbsp;'+res[0].awayTeamFullName+"</th>";
+					str2 += "<th colspan='2' style='font-size:2rem;'>"+res[0].awayTeamRheb[0]+"</th>";
+					str2 += "<td>vs</td>";
+					str2 += "<th colspan='2' style='font-size:2rem;'>"+res[0].homeTeamRheb[0]+"</th>";
+					str2 += "<th colspan='6'>";
+					str2 += "<img src='assets/img/" + res[0].homeTeamCode + ".png' width='50rem'>"+'&nbsp;'+res[0].homeTeamFullName+"</th>";
+					$("#gamedata1").append(str2);
+					
+					$("#gamedata2").empty();
+					str3 = "";
+					str3 += '<strong>gameTime : </strong>'+ res[0].gameDateTime.substr(0,16).replace("T", '&nbsp;') +'&nbsp;&nbsp;&nbsp;';
+					str3 += '<strong>stadium : </strong>'+ res[0].stadium + '&nbsp;&nbsp;';
+					str3 += '<strong>winner : </strong>' +res[0].winner ;
+					$("#gamedata2").append(str3);
+					
+					$("#gameList").empty();
+					str4 = res[0].awayTeamName + ' vs ' + res[0].homeTeamName + ' ' + res[0].gameDateTime.substr(11,5);
+					$("#gameList").append(str4);
+					
+					
+				},error:function(e){
+					console.log(e);
+				}
+			});
+		}
+		
+
+		
+		
+	
+	</script>
 
 </body>
+
 </html>
