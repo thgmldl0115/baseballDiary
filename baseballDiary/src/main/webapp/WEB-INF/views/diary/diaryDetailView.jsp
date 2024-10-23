@@ -52,6 +52,22 @@
 
 	<!-- Contact Section Form-->
 	<div class="container text-center" style="margin-bottom: 2rem;">
+		<div align="right" style="padding-right:1.5rem; padding-bottom:0.5rem;">
+			<button class="btn btn-outline-secondary btn-sm row" id="captureBtn" 
+				style="position: static; right: 50rem;">이미지로 저장하기</button>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+	    <script>
+	        document.getElementById('captureBtn').addEventListener('click', function() {
+	            html2canvas(document.body).then(canvas => {
+	                // 이미지 다운로드 링크 생성
+	                let link = document.createElement('a');
+	                link.href = canvas.toDataURL('image/png');
+	                link.download = 'screenshot.png';
+	                link.click();
+	            });
+	        });
+	    </script>
 		<div class="border d-flex justify-content-center">
 		
 		<div class="p-0 container text-center row align-items-center"> 

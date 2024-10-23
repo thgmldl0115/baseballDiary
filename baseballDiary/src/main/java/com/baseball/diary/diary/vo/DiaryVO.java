@@ -12,21 +12,6 @@ public class DiaryVO {
 	private String useYn;
 	private String updateDt;
 	private String createDt;
-	
-	
-	
-	public String getGameDate() {
-		return gameDate;
-	}
-	public void setGameDate(String gameDate) {
-		this.gameDate = gameDate;
-	}
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
-	}
 	public String getMemId() {
 		return memId;
 	}
@@ -45,10 +30,16 @@ public class DiaryVO {
 	public void setGameDay(String gameDay) {
 		this.gameDay = gameDay;
 	}
-	public String getcode() {
+	public String getGameDate() {
+		return gameDate;
+	}
+	public void setGameDate(String gameDate) {
+		this.gameDate = gameDate;
+	}
+	public String getCode() {
 		return code;
 	}
-	public void setcode(String code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 	public String getDiaryTitle() {
@@ -81,13 +72,13 @@ public class DiaryVO {
 	public void setCreateDt(String createDt) {
 		this.createDt = createDt;
 	}
-	
 	@Override
 	public String toString() {
-		return "DiaryVO [memId=" + memId + ", diaryNo=" + diaryNo + ", gameDay=" + gameDay + ", code=" + code
-				+ ", diaryTitle=" + diaryTitle + ", diaryContent=" + diaryContent + ", useYn=" + useYn + ", updateDt="
-				+ updateDt + ", createDt=" + createDt + "]";
+		return "DiaryVO [memId=" + memId + ", diaryNo=" + diaryNo + ", gameDay=" + gameDay + ", gameDate=" + gameDate
+				+ ", code=" + code + ", diaryTitle=" + diaryTitle + ", diaryContent=" + diaryContent + ", useYn="
+				+ useYn + ", updateDt=" + updateDt + ", createDt=" + createDt + "]";
 	}
+	
 	
 	
 	
