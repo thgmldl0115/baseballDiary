@@ -5,6 +5,7 @@ public class DiaryVO {
 	private String memId;
 	private int diaryNo;
 	private String gameDay;
+	private String gameDate;
 	private String code;
 	private String diaryTitle;
 	private String diaryContent;
@@ -12,6 +13,20 @@ public class DiaryVO {
 	private String updateDt;
 	private String createDt;
 	
+	
+	
+	public String getGameDate() {
+		return gameDate;
+	}
+	public void setGameDate(String gameDate) {
+		this.gameDate = gameDate;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
 	public String getMemId() {
 		return memId;
 	}

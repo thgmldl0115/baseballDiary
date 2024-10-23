@@ -51,22 +51,23 @@
 		<div class="border d-flex justify-content-center" style="padding:2rem;">
 		
 		<div class="container text-center row align-items-center"> 
-			<table class="table table-hover">
+			<table class="table table-hover" style="vertical-align:middle;">
 				<thead>
 					<tr>
-						<th>경기일</th>
-						<th>제목</th>
-						<th>작성일</th>
+						<th width = "180rem">경기일</th>
+						<th width = "400rem">제목</th>
+						<th width = "180rem">작성일</th>
+						<th width = "180rem">수정일</th>
 					</tr>
 				</thead>
 				<tbody>
 				<!-- 데이터의 수만큼 반복되는 부분 -->
 					<c:forEach items="${diaryList }" var="diary">
-					<tr>
-						<td><a href="<c:url value="/getDiary?diaryNo=${diary.diaryNo }"/> ">${diary.gameDay }</a></td>
-						<td><a href="<c:url value="/getDiary?diaryNo=${diary.diaryNo }"/> ">${diary.diaryTitle }</a></td>
-						
+					<tr onClick="location.href='<c:url value="/getDiary?diaryNo=${diary.diaryNo }"/> '">
+						<td>${diary.gameDate }</td>
+						<td>${diary.diaryTitle }</td>
 						<td>${diary.createDt }</td>
+						<td>${diary.updateDt }</td>
 					</tr>
 					</c:forEach>
 				</tbody>
