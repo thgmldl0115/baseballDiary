@@ -48,7 +48,7 @@
                 </div>
             </div>
         </header>
-    <!-- 회원가입 -->
+    <!-- 마이페이지 -->
 
 	<!-- Contact Section -->
 	<div class="container text-center" style="margin-bottom: 2rem;">
@@ -148,7 +148,7 @@
 		</div>
 	</div>
 
-	<!-- /회원가입 -->
+	<!-- /마이페이지 -->
     <jsp:include page="/WEB-INF/inc/footer.jsp"></jsp:include>
 	
 	<script type="text/javascript">

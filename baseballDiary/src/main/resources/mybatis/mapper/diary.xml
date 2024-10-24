@@ -61,7 +61,6 @@
 </update>
 
 <select id="getGameList" resultType="GameDayVO" parameterType="string">
-
 	SELECT game_day
     ,  yymm || away ||home || cnt || yy  as code
     ,  away_team
@@ -106,8 +105,6 @@
 	   FROM tb_kbo
 	   WHERE TO_CHAR(game_day,'YYYY-MM-DD') = #{gameDay}
 	   )
-	
-
 </select>
 
 	

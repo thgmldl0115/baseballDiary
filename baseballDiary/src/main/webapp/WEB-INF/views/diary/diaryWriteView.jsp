@@ -73,11 +73,7 @@
 									
 									<select id="gameList" name="code" class="form-control input-sm" 
 										style="width:100%; border: 0;" >
-										<!--
-										<option value="T" ${searchVO.searchType eq "T" ? "selected='selected'": ""} >제목</option>
-										<option value="W" ${searchVO.searchType eq "W" ? "selected='selected'": ""} >작성자</option>
-										<option value="C" ${searchVO.searchType eq "C" ? "selected='selected'": ""}>내용</option>
-										-->
+										
 									</select>
 									
 									</th>
