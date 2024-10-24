@@ -24,8 +24,17 @@
 	UPDATE tb_mem 
 	SET mem_nm=#{memNm}
 	  , kbo_team = #{kboTeam}
+	  , update_dt = SYSDATE
 	WHERE mem_id=#{memId}
 
+</update>
+
+<update id="deleteMember" parameterType="String">
+
+	UPDATE tb_mem 
+	SET use_yn = 'N'
+	WHERE mem_id=#{memId}
+	
 </update>
 
 	

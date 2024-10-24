@@ -130,5 +130,13 @@ public class MemberController {
 		return "redirect:/loginView";
 	}
 	
+	@PostMapping("/memberDelDo")
+	public String memberDelDo(String memId) throws Exception {
+		
+		memberService.deleteMember(memId);
+		
+		return "redirect:/";
+	}
+	
 
 }

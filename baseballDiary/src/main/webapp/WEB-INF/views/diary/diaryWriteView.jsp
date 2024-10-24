@@ -377,7 +377,6 @@
 			});
 		}
 		
-// 	 	let gameDay = document.getElementById('gameDay');
 		function fn_gameDay(obj){
 			console.log(obj.value);
 			
@@ -401,7 +400,6 @@
 						str +=  "<option value='" + game.code + "'>";
 						str += game.awayTeam + ' vs ' + game.homeTeam + ' ' + game.gameDay.substr(11, 5) + ' ' + game.gameNote;
 						str += "</option>";
-			            //<option value="T" ${searchVO.searchType eq "T" ? "selected='selected'": ""} >제목</option>
 			        	
 					}
 					$("#gameList").append(str);

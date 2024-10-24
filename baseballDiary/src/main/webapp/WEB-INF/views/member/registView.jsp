@@ -75,6 +75,7 @@
 					
 				</div>
 				
+				<!-- 
 				<div class="row g-3 align-items-center" style="justify-content: center;">
 					<div class="col-sm-3">
 						<label for="pw" class="col-form-label">비밀번호 확인</label>
@@ -83,8 +84,8 @@
 						<input type="password" id="pw2" name="memPw2" class="form-control"
 							aria-describedby="passwordHelpInline" placeholder="비밀번호를 다시 입력하세요"/>
 					</div>
-					
 				</div>
+				 -->
 
 				<!-- name input -->
 				<div class="row g-3 align-items-center" style="justify-content: center;">

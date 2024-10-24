@@ -41,5 +41,13 @@ public class MemberService {
 			throw new Exception();
 		}
 	}
+	
+	public void deleteMember(String memId) throws Exception {
+		int result = dao.deleteMember(memId);
+		
+		if(result == 0) {
+			throw new Exception();
+		}
+	}
 
 }

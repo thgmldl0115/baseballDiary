@@ -12,5 +12,7 @@ public interface IMemberDAO {
 	public MemberVO loginMember(MemberVO vo);
 	// 마이페이지 수정
 	public int updateMypage(MemberVO vo);
+	// 회원 탈퇴
+	public int deleteMember(String memId);
 
 }
