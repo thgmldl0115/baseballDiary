@@ -16,7 +16,12 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="${pageContext.request.contextPath }/css/styles.css" rel="stylesheet" />
 
-
+<style>
+.err {
+	color: red;
+	font-size: 12px;
+}
+</style>
 
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">

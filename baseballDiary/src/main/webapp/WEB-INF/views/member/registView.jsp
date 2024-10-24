@@ -45,20 +45,44 @@
             </div>
         </header>
     <!-- 회원가입 -->
+    <!-- Modal -->
+		<div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h1 class="modal-title fs-5" id="exampleModalLabel">${messageVO.title}</h1>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+	              <!-- title input-->
+	              <div class="mb-3">
+	                  <label for="title">${messageVO.message}</label>
+	              </div>
+	              
+		      </div>
+		      <div class="modal-footer">
+		      	<a href="<c:url value='${messageVO.url }' />" >
+		      	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+		      	</a>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 
 	<!-- Contact Section Form-->
 	<div class="container text-center" style="margin-bottom: 2rem;">
 		<div class="border d-flex justify-content-center" style="padding:2rem;">
 		
 		<div class="container text-center row align-items-center"> 
-			<form action="/registDo" method="post">
+			<form:form modelAttribute="member" action="/registDo" method="post">
 				<!-- id input -->
 				<div class="row g-3 align-items-center" style="justify-content: center;">
 					<div class="col-sm-3">
 						<label for="id" class="col-form-label">아이디</label>
 					</div>
 					<div class="col-sm-6">
-						<input type="text" id="id" name="memId" class="form-control" placeholder="아이디를 입력하세요"/>
+						<form:input path="memId" type="text" id="id" name="memId" class="form-control" placeholder="아이디를 입력하세요"/>
+						<form:errors class="err" path="memId" />
 					</div>
 					
 					
@@ -69,8 +93,9 @@
 						<label for="pw" class="col-form-label">비밀번호</label>
 					</div>
 					<div class="col-sm-6">
-						<input type="password" id="pw" name="memPw" class="form-control"
+						<form:input path="memPw" type="password" id="pw" name="memPw" class="form-control"
 							aria-describedby="passwordHelpInline" placeholder="비밀번호를 입력하세요"/>
+						<form:errors class="err" path="memPw" />
 					</div>
 					
 				</div>
@@ -93,7 +118,8 @@
 						<label for="nm" class="col-form-label">닉네임</label>
 					</div>
 					<div class="col-sm-6">
-						<input type="text" id="nm" name="memNm" class="form-control" placeholder="닉네임을 입력하세요"/>
+						<form:input path="memNm" type="text" id="nm" name="memNm" class="form-control" placeholder="닉네임을 입력하세요"/>
+						<form:errors class="err" path="memNm" />
 					</div>
 				</div>
 				
@@ -123,7 +149,7 @@
 				<!-- Submit Button -->
 				<button class="btn btn-outline-success" id="submitButton" style="margin-top:2rem;"
 					type="submit">가입하기</button>
-			</form>
+			</form:form>
 		</div>
 		
 		</div>
@@ -132,6 +158,14 @@
 	<!-- /회원가입 -->
     <jsp:include page="/WEB-INF/inc/footer.jsp"></jsp:include>
 	
+	<script>
+		$(document).ready(function(){
+				var message = "${messageVO.message}";
+				if(message != ''){
+					$("#messageModal").modal('show');
+				}
+		})
+	</script>
 	
 
 </body>

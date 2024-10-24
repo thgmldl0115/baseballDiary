@@ -1,10 +1,14 @@
 package com.baseball.diary.member.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
+import com.baseball.diary.common.exception.BizException;
 import com.baseball.diary.member.dao.IMemberDAO;
 import com.baseball.diary.member.vo.MemberVO;
+
 
 
 @Service
@@ -13,11 +17,12 @@ public class MemberService {
 	@Autowired
 	IMemberDAO dao;
 
-	public void registMember(MemberVO vo) throws Exception {
+	public void registMember(MemberVO vo) throws DuplicateKeyException
+												, DataAccessException
+												, BizException{
 		int result = dao.registMember(vo);
-		
 		if (result == 0) {
-			throw new Exception();
+			throw new BizException();
 		}
 	}
 	

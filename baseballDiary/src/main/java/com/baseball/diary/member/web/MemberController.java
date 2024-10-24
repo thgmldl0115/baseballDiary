@@ -6,14 +6,24 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.baseball.diary.common.exception.BizException;
+import com.baseball.diary.common.valid.Login;
+import com.baseball.diary.common.valid.Regist;
+import com.baseball.diary.common.vo.MessageVO;
 import com.baseball.diary.member.service.MemberService;
 import com.baseball.diary.member.vo.MemberVO;
+
 
 @Controller
 public class MemberController {
@@ -25,7 +35,7 @@ public class MemberController {
 	private BCryptPasswordEncoder passwordEncoder;
 	
 	@RequestMapping("/registView")
-	public String registView() {
+	public String registView(@ModelAttribute("member") MemberVO member) {
 		return "member/registView";
 	}
 	
@@ -43,52 +53,55 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/registDo")
-	public String registDo(HttpServletRequest request) {
+	public String registDo(@Validated(Regist.class) @ModelAttribute("member") MemberVO member
+			 , BindingResult result
+			 , Model model) {
 		
-		String id = request.getParameter("memId");
-		String pw = request.getParameter("memPw");
-		String nm = request.getParameter("memNm");
-		String kboTeam = request.getParameter("kboTeam");
-		
-		MemberVO member = new MemberVO();
-		
-		String encodePw = passwordEncoder.encode(pw);
-		
-		member.setMemId(id);
-		member.setMemPw(encodePw);
-		member.setMemNm(nm);
-		member.setKboTeam(kboTeam);
-		
-		
-		System.out.println(member.toString());
-		
+		if(result.hasErrors()) {
+			return "member/registView";
+		}
 		try {
+			member.setMemPw(passwordEncoder.encode(member.getMemPw()));
 			memberService.registMember(member);
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (DuplicateKeyException e) {
+			MessageVO messageVO = new MessageVO(false, "회원가입", "중복 아이디입니다!", "/registView", "회원가입");
+			model.addAttribute("messageVO", messageVO);
+			return "member/registView";
+		} catch (DataAccessException e) {
+			MessageVO messageVO = new MessageVO(false, "회원가입", "잘못된 입력입니다!", "/registView", "회원가입");
+			model.addAttribute("messageVO", messageVO);
+			return "member/registView";
+		} catch (BizException e) {
+			MessageVO messageVO = new MessageVO(false, "회원가입", "회원가입이 되지 않았습니다!", "/registView", "회원가입");
+			model.addAttribute("messageVO", messageVO);
+			return "member/registView";
 		}
 		
-		return "redirect:/loginView";
+		MessageVO messageVO = new MessageVO(true, "회원가입", "회원가입이 완료되었습니다.", "/loginView", "로그인");
+		// 리다이렉트시 데이터 전달
+		model.addAttribute("messageVO", messageVO);
+		
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/loginView")
-	public String loginView() {
+	public String loginView(@ModelAttribute("member") MemberVO member) {
 		return "member/loginView";
 	}
 	
 	@RequestMapping("/loginDo")
-	public String loginDo(MemberVO vo, HttpSession session
-			, boolean remember, String fromUrl
-			, HttpServletResponse response) throws Exception {
+	public String loginDo(@ModelAttribute("member") MemberVO vo, boolean remember
+			, HttpSession session
+			, HttpServletResponse response
+			, @Validated(Login.class) @ModelAttribute("member") MemberVO member
+			, BindingResult result, Model model) throws Exception {
 		
+		if(result.hasErrors()) {
+			
+			return "member/loginView";
+		}
 		MemberVO login = memberService.loginMember(vo);
 		
-		/*
-		 * DB에서 가져온 암호화된 비밀번호(vo.getMemPw())에서 salt값 추출
-		 * 사용자가 입력한 평문 비밀번호(login.getMemPw())와 추출된 salt값을 사용하여 비밀번호 재암호화
-		 * 2단계에서 암호화된 값과 DB에서 가져온 암호화된 비밀번호 비료
-		 * 두 값이 일치하면 true반환, 그렇지 않으면 false를 반환 
-		 */
 		boolean match = passwordEncoder.matches(vo.getMemPw(), login.getMemPw());
 		if(login == null || !match) {
 			return "redirect:/loginView";
@@ -98,7 +111,7 @@ public class MemberController {
 		
 		if(remember) {
 			// 쿠키 생성
-			Cookie cookie = new Cookie("rememberId", vo.getMemId());
+			Cookie cookie = new Cookie("rememberId", login.getMemId());
 			// 응답하는 객체에 붙여준다.
 			response.addCookie(cookie);
 		}else {
@@ -108,8 +121,7 @@ public class MemberController {
 			// 유효기간 0짜리인 쿠키를 응답하는 객체에 붙여준다.
 			response.addCookie(cookie);
 		}
-		
-		System.out.println(login);
+
 		// 로그인시 해당 페이지로 들어가기
 		return "redirect:/main";
 	}
